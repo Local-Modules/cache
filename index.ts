@@ -1,1 +1,3 @@
-export * from './src/cache'
+import * as cache from './src/cache'
+
+export default cache

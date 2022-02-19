@@ -19,8 +19,7 @@
         "strict": true
     },
     "include": [
-        "./src",
-        "./ambient.d.ts"
+        "./src"
     ],
     "exclude": [
         "node_modules",

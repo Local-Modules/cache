@@ -2,64 +2,46 @@ import memoryCache from 'memory-cache'
 
 
 // @ts-ignore
-export const CACHE_AGE = +process.env.CACHE_AGE || 60 * 10 * 1000 // 10 minutes by default
+const CACHE_AGE = +process.env.CACHE_AGE || 60 * 10 * 1000 // 10 minutes by default
 
-class cache {
-  private _cacheAge: number
+// returns all cached keys
+export const keys = (): string[] => {
+  return memoryCache.keys()
+}
 
-  constructor () {
-    this._cacheAge = CACHE_AGE
+export const set = (key: string, data: any, cacheAge: number = CACHE_AGE) => {
+  memoryCache.put(key, JSON.stringify(data), cacheAge)
+}
+
+export const get = async <T>(key: string): Promise<T | null> => {
+  const data: string = memoryCache.get(key)
+
+  try {
+    return JSON.parse(data) as T
   }
-
-  get cacheAge () {
-    return this._cacheAge
-  }
-
-  set cacheAge (value: number) {
-    this._cacheAge = value
-  }
-
-  public set = <T>(key: string, data: T, cacheAge: number = this._cacheAge) => {
-    memoryCache.put(key, JSON.stringify(data), cacheAge)
-  }
-
-  public get = async <T>(key: string): Promise<T | null> => {
-    const data: string = memoryCache.get(key)
-
-    try {
-      return JSON.parse(data) as T
-    }
-    catch (error) {
-      console.error('parse cache error for key')
-      this.clear(key)
-      return null
-    }
-  }
-
-  // clears specific key
-  public clear = (key: string) => {
-    memoryCache.del(key)
-  }
-
-  // clears all keys that match pattern
-  public clearMatch = (pattern: string) => {
-    const keys: string[] = this.keys()
-
-    const matchedKeys = keys.filter(key => key.includes(pattern))
-    matchedKeys.forEach(key => {
-      this.clear(key)
-    })
-  } 
-
-  // clears all keys
-  public clearAll = () => {
-    memoryCache.clear()
-  }
-
-  // returns all cached keys
-  public keys = (): string[] => {
-    return memoryCache.keys()
+  catch (error) {
+    console.error('parse cache error for key')
+    clear(key)
+    return null
   }
 }
 
-export default new cache
+// clears specific key
+export const clear = (key: string) => {
+  memoryCache.del(key)
+}
+
+// clears all keys that match pattern
+export const clearMatch = (pattern: string) => {
+  const res: string[] = keys()
+
+  const matchedKeys = res.filter(key => key.includes(pattern))
+  matchedKeys.forEach(key => {
+    clear(key)
+  })
+} 
+
+// clears all keys
+export const clearAll = () => {
+  memoryCache.clear()
+}
