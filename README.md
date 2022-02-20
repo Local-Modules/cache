@@ -12,7 +12,7 @@ This library enhances [`memory-cache`](https://www.npmjs.com/package/memory-cach
 import cache from '@locmod/cache'
 ```
 
-#####cache.set 
+#### cache.set 
 ```ts
 (key: string, data: any, cacheAge?: number) => void
 ```
@@ -28,7 +28,7 @@ cache.set('key3', 'foo', 1000) // 1 second
 ---
 
 
-#####cache.get 
+#### cache.get 
 ```ts
 <T>(key: string) => T | null
 ```
@@ -48,7 +48,7 @@ setTimeout(() => {
 
 ---
 
-#####cache.keys 
+#### cache.keys 
 ```ts
 () => string[]
 ```
@@ -61,7 +61,7 @@ cache.keys() // ['key1', 'key2', 'key3']
 
 ---
 
-#####cache.clear 
+#### cache.clear 
 ```ts
 (key: string) => void
 ```
@@ -78,7 +78,7 @@ cache.get('foo') // null
 
 ---
 
-#####cache.clearMatch 
+#### cache.clearMatch 
 ```ts
 (pattern: string) => void
 ```
@@ -101,9 +101,9 @@ cache.get('foo')     // bar
 
 ---
 
-#####cache.clearAll 
+#### cache.clearAll 
 ```ts
-(pattern: string) => void
+() => void
 ```
 
 Removes the saved keys
