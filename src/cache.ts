@@ -10,20 +10,11 @@ export const keys = (): string[] => {
 }
 
 export const set = (key: string, data: any, cacheAge: number = CACHE_AGE) => {
-  memoryCache.put(key, JSON.stringify(data), cacheAge)
+  memoryCache.put(key, data, cacheAge)
 }
 
-export const get = async <T>(key: string): Promise<T | null> => {
-  const data: string = memoryCache.get(key)
-
-  try {
-    return JSON.parse(data) as T
-  }
-  catch (error) {
-    console.error('parse cache error for key')
-    clear(key)
-    return null
-  }
+export const get = <T>(key: string): T | null => {
+  return memoryCache.get(key)
 }
 
 // clears specific key
