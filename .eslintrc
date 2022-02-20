@@ -1,0 +1,94 @@
+{
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "ignorePatterns": [
+        "*.test.ts",
+        "lib/*",
+        "dist/*"
+    ],
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
+    "rules": {
+        "curly": [
+            "error"
+        ],
+        "indent": "off",
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "brace-style": [
+            "error",
+            "stroustrup"
+        ],
+        "prefer-const": "off",
+        "no-multi-spaces": "warn",
+        "no-trailing-spaces": "warn",
+        "semi": [
+            "error",
+            "never"
+        ],
+        "max-len": "off",
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ],
+        "array-bracket-spacing": [
+            "error",
+            "always"
+        ],
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 2
+            }
+        ],
+        "comma-spacing": "warn",
+        "comma-dangle": [
+            "error",
+            {
+                "arrays": "always-multiline",
+                "objects": "always-multiline",
+                "imports": "always-multiline",
+                "exports": "always-multiline",
+                "functions": "never"
+            }
+        ],
+        "keyword-spacing": "error",
+       
+        // typescript
+        "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/no-for-in-array": "error",
+        "@typescript-eslint/naming-convention": [
+            "warn",
+            {
+                "selector": "variable",
+                "types": [
+                    "boolean"
+                ],
+                "format": [
+                    "PascalCase"
+                ],
+                "prefix": [
+                    "is",
+                    "are",
+                    "should",
+                    "has",
+                    "can",
+                    "did",
+                    "will",
+                    "with"
+                ]
+            }
+        ],
+        "@typescript-eslint/indent": [
+            "error",
+            2,
+            {
+                "SwitchCase": 1
+            }
+        ]
+    }
+}
